@@ -33,6 +33,20 @@ module Kublai
       post_request(post_data)["market_depth"]
     end
 
+    def get_orders
+      post_data = initial_post_data
+      post_data['method'] = 'getOrders'
+      post_data['params'] = []
+      post_request(post_data)
+    end
+
+    def get_order(order_id)
+      post_data = initial_post_data
+      post_data['method'] = 'getOrder'
+      post_data['params'] = [order_id]
+      post_request(post_data)
+    end
+
     def buy(price, amount)
       price = cut_off(price, 5)
       amount = cut_off(amount, 8)
