@@ -6,6 +6,8 @@ require 'json'
 
 
 module Kublai
+  class Error < StandardError; end
+  class UnauthorizedError < Error; end
   class BTCChina
 
     def initialize(access='', secret='')
@@ -30,7 +32,12 @@ module Kublai
       post_data = initial_post_data
       post_data['method'] = 'getMarketDepth2'
       post_data['params'] = []
-      post_request(post_data)["market_depth"]
+      resp = post_request(post_data)
+      if resp["market_depth"]
+        resp["market_depth"]
+      else
+        resp
+      end
     end
 
     def get_orders
@@ -136,14 +143,16 @@ module Kublai
         JSON.parse(response_data.body)['ticker']
       elsif response_data.code == '200' && response_data.body['error']
         error = JSON.parse(response_data.body)
-        warn("Error Code: #{error['error']['code']}")
-        warn("Error Message: #{error['error']['message']}")
-        false
+        #warn("Error Code: #{error['error']['code']}")
+        #warn("Error Message: #{error['error']['message']}")
+        #false
+        error['error']
       else
-        warn("Error Code: #{response_data.code}")
-        warn("Error Message: #{response_data.message}")
-        warn("check your accesskey/privatekey") if response_data.code == '401'
-        false
+        #warn("Error Code: #{response_data.code}")
+        #warn("Error Message: #{response_data.message}")
+        #warn("check your accesskey/privatekey") if response_data.code == '401'
+        #false
+        { 'code' => response_data.code, 'message' => response_data.message }
       end
     end
 
