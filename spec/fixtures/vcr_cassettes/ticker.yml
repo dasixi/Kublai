@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://data.btcchina.com/data/ticker
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Jan 2014 09:10:12 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Front-End-Https:
+      - 'on'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx/1.4.3
+      Set-Cookie:
+      - PHPSESSID=46900kk816n9q6udbna6s2djm3; path=/
+      - PHPSESSID=his4548vj0tfo88atkosqolg36; path=/
+      X-Cache-Cfc:
+      - EXPIRED - 1389172208.001
+      X-Powered-By:
+      - PHP/5.4.21
+      Content-Length:
+      - '118'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"ticker":{"high":"5354.99","low":"4501.00","buy":"4906.37","sell":"4920.02","last":"4880.09","vol":"30105.87100000"}}'
+    http_version: 
+  recorded_at: Wed, 08 Jan 2014 09:10:13 GMT
+recorded_with: VCR 2.8.0
