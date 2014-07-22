@@ -100,7 +100,7 @@ module Kublai
     end
 
     def sign(params_string)
-      signiture = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha1'), @secret_key, params_string)
+      signiture = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), @secret_key, params_string)
       'Basic ' + Base64.strict_encode64(@access_key + ':' + signiture)
     end
 
@@ -112,7 +112,7 @@ module Kublai
 
     def initial_post_data
       post_data = {}
-      post_data['tonce']  = (Time.now.to_f * 1000).to_i.to_s
+      post_data['tonce']  = (Time.now.to_f * 1000000).to_i.to_s
       post_data
     end
 
