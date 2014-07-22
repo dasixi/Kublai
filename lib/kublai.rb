@@ -40,6 +40,10 @@ module Kublai
       end
     end
 
+    def get_orderbook
+      get_request("https://data.btcchina.com/data/orderbook")
+    end
+
     def get_orders
       post_data = initial_post_data
       post_data['method'] = 'getOrders'
