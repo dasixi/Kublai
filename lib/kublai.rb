@@ -31,13 +31,17 @@ module Kublai
     def get_market_depth
       post_data = initial_post_data
       post_data['method'] = 'getMarketDepth2'
-      post_data['params'] = []
+      post_data['params'] = [20, 'BTCCNY']
       resp = post_request(post_data)
       if resp["market_depth"]
         resp["market_depth"]
       else
         resp
       end
+    end
+
+    def ticker
+      get_request("https://data.btcchina.com/data/ticker?market=btccny")
     end
 
     def get_orderbook
@@ -88,10 +92,6 @@ module Kublai
       ask = market_depth['ask'][0]['price']
       bid = market_depth['bid'][0]['price']
       (ask + bid) / 2
-    end
-
-    def ticker
-      get_request("https://data.btcchina.com/data/ticker?market=btccny")
     end
 
     private
@@ -151,6 +151,8 @@ module Kublai
         #warn("Error Message: #{error['error']['message']}")
         #false
         error['error']
+      elsif response_data.code == '200' && response_data.body
+        JSON.parse(response_data.body)
       else
         #warn("Error Code: #{response_data.code}")
         #warn("Error Message: #{response_data.message}")
