@@ -58,7 +58,7 @@ module Kublai
       price = cut_off(price, 5)
       amount = cut_off(amount, 8)
       post_data = initial_post_data
-      post_data['method']='buyOrder'
+      post_data['method']='buyOrder2'
       post_data['params']=[price, amount]
       post_request(post_data)
     end
@@ -67,7 +67,7 @@ module Kublai
       price = cut_off(price, 5)
       amount = cut_off(amount, 8)
       post_data = initial_post_data
-      post_data['method']='sellOrder'
+      post_data['method']='sellOrder2'
       post_data['params']=[price, amount]
       post_request(post_data)
     end
@@ -87,7 +87,7 @@ module Kublai
     end
 
     def ticker
-      get_request("https://data.btcchina.com/data/ticker")
+      get_request("https://data.btcchina.com/data/ticker?market=btccny")
     end
 
     private
@@ -112,7 +112,7 @@ module Kublai
 
     def initial_post_data
       post_data = {}
-      post_data['tonce']  = (Time.now.to_f * 1000000).to_i.to_s
+      post_data['tonce']  = (Time.now.to_f * 1000).to_i.to_s
       post_data
     end
 
